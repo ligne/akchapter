@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <style>
+        .pass:before {
+            content: 'PASS: ';
+            color:  blue;
+            font-weight: bold;
+        }
+        .fail:before {
+            content: 'FAIL: ';
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="chapter"></div>
+    <ul id="tests"></ul>
+
+    <script type='text/javascript' src='wp.idx'></script>
+    <script type="text/javascript">
+      function chapter(doy) {
+          return wp['chapters'][doy]
+      }
+
+      Date.prototype.deltaDays = function() {
+          var d = new Date(wp['date'])
+          return Math.floor((this-d)/8.64e+7);  // magic number is ms in one day
+      }
+
+      document.getElementById("chapter").innerHTML = new Date().toLocaleDateString()
+                                                   + ' &mdash; '
+                                                   + chapter(new Date().deltaDays());
+    </script>
+
+  </body>
+</html>
